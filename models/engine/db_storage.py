@@ -28,8 +28,20 @@ class DBStorage:
 
     def all(self, cls=None):
         """all method"""
+        rdict = {}
         if cls == None:
-
-        self.__session = cls
-        return 
+            query_1 = self.__session.query(User, State, City, Amenity,
+                                        Place, Review)
+            for i in query_1:
+                key_word = ("{}.{}".format(type(i).__name__, i.id))
+                rdict[key_word] = i
+            return rdict
+        else:
+            if type(cls) == str:
+                cls = eval(cls)
+            query_2 = self.__session.query(cls)
+            for x in query_2:
+                key_word = ("{}.{}".format(type(x).__name__, x.id))
+                rdict[key_word] = x
+                return rdict
 
