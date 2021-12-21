@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
 from AirBnB_clone_v2.models import city
-from AirBnB_clone_v2.models.city import City
+from models.city import City
 from models.base_model import Base, BaseModel
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
@@ -17,7 +17,7 @@ class State(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
         def cities(self):
-            """cities with state_id == to current id"""
+            """City instances with state_id == to current state.id"""
             c_list = []
             dict_obj = all(City)
             for i in list(dict_obj).values():
