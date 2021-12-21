@@ -2,7 +2,6 @@
 """ City Module for HBNB project """
 from sqlalchemy.sql.schema import ForeignKey
 from models.base_model import Base, BaseModel
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, ForeignKey
 
 
