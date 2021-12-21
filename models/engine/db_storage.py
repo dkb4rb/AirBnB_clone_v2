@@ -27,18 +27,18 @@ class DBStorage:
         host = getenv('HBNB_MYSQL_HOST')
         db = getenv('HBNB_MYSQL_DB')
 
-        self.__engine = create_engine("""'mysql+mysqldb://{}:{}@{}/{}'
-                                    .format(user, password, host, db),
-                                    pool_pre_ping=True""")
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
+                                      .format(user, password, host, db),
+                                      pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """all method"""
         rdict = {}
-        if cls == None:
+        if cls is None:
             query_1 = self.__session.query(User, State, City, Amenity,
-                                        Place, Review)
+                                           Place, Review)
             for i in query_1:
                 key_word = ("{}.{}".format(type(i).__name__, i.id))
                 rdict[key_word] = i
