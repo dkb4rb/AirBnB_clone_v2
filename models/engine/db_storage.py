@@ -23,4 +23,13 @@ class DBStorage:
         self.__engine = create_engine("""'mysql+mysqldb://{}:{}@{}/{}'
                                     .format(user, password, host, db),
                                     pool_pre_ping=True""")
-        
+        if getenv('HBNB_ENV') == 'test':
+            Base.metadata.drop_all(self.__engine)
+
+    def all(self, cls=None):
+        """all method"""
+        if cls == None:
+
+        self.__session = cls
+        return 
+
