@@ -1,11 +1,18 @@
 #!/usr/bin/python3
 """Module: DBStorage, new engine"""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 from sqlalchemy.orm import Session, query
 from sqlalchemy.sql.functions import user
 from models.base_model import Base, BaseModel
 from os import getenv
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.user import User
+from models.amenity import Amenity
 
 
 class DBStorage:
