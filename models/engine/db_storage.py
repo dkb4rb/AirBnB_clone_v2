@@ -45,3 +45,10 @@ class DBStorage:
                 rdict[key_word] = x
                 return rdict
 
+    def new(self, obj):
+        """Add the object to the current database session"""
+        self.__session.add(obj)
+
+    def save(self):
+        """Commit al changesof the current db session"""
+        self.__session.commit()
