@@ -135,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
                 nu_parameter[1] = float(nu_parameter[1])
             setattr(nu_object, nu_parameter[0], nu_parameter[1])
         print(nu_object.id)
+        storage.save()
         nu_object.save()
 
     def help_create(self):
