@@ -34,7 +34,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """all method"""
+        """all method, to querying on current d.base"""
         rdict = {}
         if cls is None:
             query_1 = self.__session.query(User, State, City, Amenity,
@@ -62,12 +62,12 @@ class DBStorage:
 
     def delete(self, obj=None):
         """Delete from the current db session"""
-        if obj:
+        if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
         """Creates all tables in the database"""
         Base.metadata.create_all(self.__engine)
         session_f = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        seshion = scoped_session(session_f)
-        self.__session = seshion()
+        Session = scoped_session(session_f)
+        self.__session = Session()
