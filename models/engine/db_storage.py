@@ -35,22 +35,18 @@ class DBStorage:
 
     def all(self, cls=None):
         """all method, to querying on current d.base"""
-        rdict = {}
         if cls is None:
-            query_1 = self.__session.query(User, State, City, Amenity,
-                                           Place, Review)
-            for i in query_1:
-                key_word = ("{}.{}".format(type(i).__name__, i.id))
-                rdict[key_word] = i
-            return rdict
+            objs = self.__session.query(State).all()
+            objs.extend(self.__session.query(City).all())
+            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(Place).all())
+            objs.extend(self.__session.query(Review).all())
+            objs.extend(self.__session.query(Amenity).all())
         else:
             if type(cls) == str:
                 cls = eval(cls)
-            query_2 = self.__session.query(cls)
-            for x in query_2:
-                key_word = ("{}.{}".format(type(x).__name__, x.id))
-                rdict[key_word] = x
-                return rdict
+            objs = self.__session.query(cls)
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
         """Add the object to the current database session"""
