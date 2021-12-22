@@ -3,7 +3,7 @@
 import unittest
 from console import HBNBCommand
 from io import StringIO
-import os
+from unittest.mock import patch
 
 
 class test_Console(unittest.TestCase):
