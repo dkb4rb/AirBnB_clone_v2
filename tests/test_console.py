@@ -8,15 +8,32 @@ from unittest.mock import patch
 
 class test_Console(unittest.TestCase):
     """Class to test the console"""
-    @classmethod
-    def setUpClass(self):
-        """Sets a Class for testing"""
-        self.console_1 = HBNBCommand()
+   @classmethod
+    def setUpClass(cls):
+        """HBNBCommand testing setup.
+        Temporarily rename any existing file.json.
+        Reset FileStorage objects dictionary.
+        Create an instance of the command interpreter.
+        """
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        cls.HBNB = HBNBCommand()
 
     @classmethod
-    def tearDownClass(self):
-        """Test to delete the class created"""
-        del self.console_1
+    def tearDownClass(cls):
+        """HBNBCommand testing teardown.
+        Restore original file.json.
+        Delete the test HBNBCommand instance.
+        """
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        del cls.HBNB
+        if type(models.storage) == DBStorage:
+            models.storage._DBStorage__session.close()
 
     def test_do_create(self):
         """Testing do_create in the console"""
