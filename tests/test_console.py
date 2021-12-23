@@ -25,7 +25,7 @@ class test_Console(unittest.TestCase):
             self.assertTrue(len(mock.getvalue()) >= 1)
         with patch('sys.stdout', new=StringIO()) as mock_2:
             self.console_1.onecmd("Show state" + mock.getvalue())
-            self.assertTrue("numb" in mock_2.getvalue())
+            self.assertFalse("numb" in mock_2.getvalue())
          with patch("sys.stdout", new=StringIO()) as f:
             self.HBNB.onecmd("create User")
             us = f.getvalue().strip()
