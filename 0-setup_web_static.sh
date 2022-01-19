@@ -22,7 +22,7 @@ function new_dirs(){
 # execute one update first
 function dependences(){
         which nginx &>1
-        if [ echo $? -eq 1 ]; then
+        if [ "$(echo \$?)" -eq 1 ]; then
                 apt-get update
                 apt-get install -y nginx
         else
