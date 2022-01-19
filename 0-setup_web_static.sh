@@ -21,15 +21,9 @@ function new_dirs(){
 #comprove all dependences to server
 # execute one update first
 function dependences(){
-        which nginx &>1
-        if [ "$(echo \$?)" -eq 1 ]; then
-                apt-get update
-                apt-get install -y nginx
-        else
-#               echo "[!] Iniciando servidor"
-                sleep 1
-                service nginx start
-        fi
+        apt-get update
+        apt-get install -y nginx
+        service nginx start
 }
 
 # The function execute one configuration to nginx server to http response
