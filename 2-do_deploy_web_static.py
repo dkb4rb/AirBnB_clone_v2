@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """
  generates a .tgz archive from the contents
-of the web_static folder
-and deploy it to web servers
 """
 
 from datetime import datetime
