@@ -9,8 +9,9 @@ import os.path
 
 env.hosts = ['34.73.121.48', '34.235.116.181']
 
+
 def do_pack():
-    """ this function return the value path file tar 
+    """ this function return the value path file tar
         Otherwise
             Return None
     """
@@ -28,9 +29,9 @@ def do_pack():
         return None
     return file
 
+
 def do_deploy(archive_path):
-    """
-        deploy archive to web servers
+    """ deploy archive to web servers
     """
     if os.path.exists(archive_path) is False:
         return False
@@ -48,8 +49,8 @@ def do_deploy(archive_path):
     run('rm -rf /data/web_static/current')
     run('ln -s ' + re_path + ' /data/web_static/current')
     return True
-  
-  
+
+
 def deploy():
     """
     Creates and distributes an archive to  web server
