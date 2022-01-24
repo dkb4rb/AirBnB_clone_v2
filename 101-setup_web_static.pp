@@ -1,14 +1,8 @@
 # Nginx configuration file
-
-package { 'nginx':
-  ensure   => 'present',
-  provider => 'apt'
-} ->
-
 $nginx_conf = "server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
+    add_header X-Served-By ${hostname};
     root   /var/www/html;
     index  index.html index.htm;
     location /hbnb_static {
@@ -24,6 +18,11 @@ $nginx_conf = "server {
       internal;
     }
 }"
+
+package { 'nginx':
+  ensure   => 'present',
+  provider => 'apt'
+} ->
 
 file { '/data':
   ensure  => 'directory'
@@ -79,6 +78,5 @@ file { '/etc/nginx/sites-available/default':
 } ->
 
 exec { 'nginx restart':
-	path => '/usr/sbin/'
+	path => '/etc/init.d/'
 } ->
-
